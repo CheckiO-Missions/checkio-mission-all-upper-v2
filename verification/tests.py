@@ -44,10 +44,13 @@ TESTS = {
             "input": ['DIGITS123'],
             "answer": True,
         },
-
         {
             "input": ['WORLD'],
             "answer": True,
+        },
+        {
+            "input": ['123 456'],
+            "answer": False,
         }
     ]
 }
