@@ -25,7 +25,7 @@ TESTS = {
         {
             "input": [''],
             "answer": False,
-        }
+        },
     ],
     "Extra": [
         {
@@ -51,6 +51,6 @@ TESTS = {
         {
             "input": ['123 456'],
             "answer": False,
-        }
+        },
     ]
 }
