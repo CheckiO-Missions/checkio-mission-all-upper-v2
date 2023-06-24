@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Nie mam pojęcia, jak zacząć rozwiązywać tę misję.
+    </div>
+    <div class="answer">
+        <p>
+            chodzi o to, żeby usunąć wszystkie białe spacje z podanego adresu <b class="code">text</b>, sprawdzić, czy wszystkie znaki razem nie są cyframi i czy każdy znak jest pisany wielkimi literami.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, od czego powinienem zacząć?
+    </div>
+    <div class="answer">
+        <p>
+            Przede wszystkim proszę zastąpić wszystkie białe spacje w <b class="code">text</b> pustą linią "". Proszę to zrobić metodą <a target="_blank" href="https://www.w3schools.com/python/ref_string_replace.asp">str.replace()</a>. Proszę przypisać wynik do zmiennej. 
+        </p>
+        <pre class="brush: python">
+text1 = text.replace(" ", "")
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        To proste. Co powinienem sprawdzić w następnej kolejności?
+    </div>
+    <div class="answer">
+        <p>
+            Musi Pan sprawdzić kilka warunków. W tym celu można użyć operatora <b class="code">and</b> lub funkcji <a target="_blank" href="https://www.w3schools.com/python/ref_func_all.asp">all()</a> z wszystkimi niezbędnymi warunkami jako elementami sekwencji argumentów.
+        </p>
+        <pre class="brush: python">
+return all((...))
+        </pre>
+        <p>
+            Proszę zauważyć, że funkcja przyjmuje tylko jeden argument - sekwencję warunków.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Zacznijmy sprawdzać nasz nowy tekst1! Co powinno być pierwsze?
+    </div>
+    <div class="answer">
+        <p>
+            Zgodnie z opisem, sprawdzenie pustego <b class="code">text1</b> musi zwrócić <b class="code">False</b>. Tak więc, aby uzyskać <b class="code">True</b>, trzeba <b class="code">text1</b> NIE być pusty. Jest to pierwsze sprawdzenie i aby je wykonać, wystarczy umieścić sam <b class="code">text1</b> jako argument <b class="code">all()</b>. Python interpretuje niepuste ciągi jako <b class="code">True</b>.
+        </p>
+        <pre class="brush: python">
+return all((text1, ...))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Krótko i sprytnie! Co dalej?
+    </div>
+    <div class="answer">
+        <p>
+            Teraz proszę sprawdzić, czy <b class="code">text1</b> nie jest liczbą całkowitą (nie ma liter i może być przekonwertowana na liczbę całkowitą). Proszę użyć metody <a target="_blank" href="https://www.w3schools.com/python/ref_string_isdigit.asp">str.isdigit()</a>, która sprawdza, czy wszystkie znaki w ciągu znaków są cyframi. Proszę odwrócić wynik sprawdzania, ponieważ NIE potrzebują Państwo, aby <b class="code">text1</b> było liczbą. 
+        </p>
+        <pre class="brush: python">
+return all((text1, not text1.isdigit(), ...))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Jeśli tekst1 nie jest pusty i nie jest liczbą, jak sprawdzić, czy jest pisany wielkimi literami?
+    </div>
+    <div class="answer">
+        <p>
+            Tak, to jest ostateczne sprawdzenie. Python ma specjalną metodę do sprawdzania tego (cyfra z dużą literą jest również uważana za dużą, tak samo z małą literą) <a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a>. Zwraca ona <b class="code">True</b> jeśli wszystkie symbole w ciągu są pisane wielkimi literami. 
+        </p>
+        <pre class="brush: python">
+return all((text1, not text1.isdigit(), text1.isupper()))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Jak więc powinno wyglądać moje ostateczne rozwiązanie?
+    </div>
+    <div class="answer">
+        <p>
+            Proszę tylko opakować swój kod w wyrażenie funkcyjne. Zaleca się używanie podpowiedzi typu dla danych wejściowych i wyjściowych. 
+        </p>
+        <p>Oto całe rozwiązanie:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_all_upper(text: str) -> bool:
+
+    text1 = text.replace(" ", "")
+    return all((text1, not text1.isdigit(), text1.isupper()))
+        </pre>
+        </div>
+        <p>
+            Teraz, gdy rozumieją Państwo wewnętrzną logikę sprawdzania, chcę Państwu powiedzieć, że Python jest wystarczająco inteligentny i <b class="code">str.isupper()</b> sam wykonuje wszystkie niezbędne sprawdzenia! Tak więc, poniższy kod działa poprawnie.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_all_upper(text: str) -> bool:
+
+    return text.isupper()
+        </pre>
+        </div>
+        <p>
+            Mogą Państwo również użyć funkcji lambda (anonimowej):
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+is_all_upper = lambda text: text.isupper()
+        </pre>
+        </div>
+        <p>
+            Ponieważ używa Pan standardowej metody bez żadnych zmian, może Pan użyć jej zamiast swojej funkcji w ten sposób. Wszystkie te rozwiązania działają. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+is_all_upper = str.isupper
+        </pre>
+        </div>
+        <p>
+            Proszę zauważyć, że nie ma nawiasów - odnosi się Pan do metody, a nie ją wywołuje.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Dzięki! Teraz wiem i rozumiem więcej! Wszystko działa jak należy!
+    </div>
+    <div class="answer">
+        miło mi to słyszeć!
+    </div>
+</div>
+</body>
