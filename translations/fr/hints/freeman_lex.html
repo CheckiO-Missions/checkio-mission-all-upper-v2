@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        Je n'ai aucune idée de la manière de commencer à résoudre cette mission.
+    </div>
+    <div class="answer">
+        <p>
+            💡 L'idée générale est de supprimer tous les espaces blancs du site <b class="code">text</b>, de vérifier que tous les caractères ne sont pas des chiffres et que chaque caractère est en majuscule.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, par quoi dois-je commencer?
+    </div>
+    <div class="answer">
+        <p>
+            Tout d'abord, remplacez tous les espaces blancs dans <b class="code">text</b> par des lignes vides "". Faites-le avec la méthode <a target="_blank" href="https://www.w3schools.com/python/ref_string_replace.asp">str.replace()</a>. Attribuez le résultat à une variable. 
+        </p>
+        <pre class="brush: python">
+text1 = text.replace(" ", "")
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        C'est facile. Que dois-je vérifier ensuite?
+    </div>
+    <div class="answer">
+        <p>
+            Vous devez vérifier quelques conditions. Pour ce faire, vous pouvez utiliser l'opérateur <b class="code">and</b> ou la fonction <a target="_blank" href="https://www.w3schools.com/python/ref_func_all.asp">all()</a> avec toutes les conditions nécessaires comme éléments de la séquence d'arguments.
+        </p>
+        <pre class="brush: python">
+return all((...))
+        </pre>
+        <p>
+            Notez que la fonction ne prend qu'un seul argument - une séquence de conditions.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Commençons à vérifier notre nouveau texte1! Quel devrait être le premier?
+    </div>
+    <div class="answer">
+        <p>
+            D'après la description, la vérification de <b class="code">text1</b> vide doit renvoyer <b class="code">False</b>. Pour obtenir <b class="code">True</b>, il faut donc que <b class="code">text1</b> ne soit pas vide. Il s'agit de la première vérification et pour l'effectuer, il vous suffit de mettre <b class="code">text1</b> lui-même en argument de <b class="code">all()</b>. Python interprète les chaînes non vides comme <b class="code">True</b>.
+        </p>
+        <pre class="brush: python">
+return all((text1, ...))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Court et astucieux! Quelle est la prochaine étape?
+    </div>
+    <div class="answer">
+        <p>
+            Vous devez maintenant vérifier si <b class="code">text1</b> n'est pas un nombre entier (sans lettres et pouvant être converti en un nombre entier). Utilisez la méthode <a target="_blank" href="https://www.w3schools.com/python/ref_string_isdigit.asp">str.isdigit()</a>, qui vérifie que tous les caractères d'une chaîne sont des chiffres. Vous devez inverser le résultat de la vérification puisque vous n'avez PAS besoin que votre <b class="code">text1</b> soit un nombre. 
+        </p>
+        <pre class="brush: python">
+return all((text1, not text1.isdigit(), ...))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Si text1 n'est pas vide et n'est pas un nombre, comment vérifier s'il est en majuscules?
+    </div>
+    <div class="answer">
+        <p>
+            Oui, c'est la vérification finale. Python a une méthode spécifique pour le vérifier (un chiffre avec une lettre en majuscule est considéré comme majuscule également, de même pour une lettre en minuscule) <a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a>. Elle renvoie <b class="code">True</b> si tous les symboles d'une chaîne sont en majuscules. 
+        </p>
+        <pre class="brush: python">
+return all((text1, not text1.isdigit(), text1.isupper()))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Alors, à quoi devrait ressembler ma solution finale?
+    </div>
+    <div class="answer">
+        <p>
+            Il vous suffit d'envelopper votre code dans une expression de fonction. Il est fortement recommandé d'utiliser des indications de type pour les données d'entrée et de sortie. 
+        </p>
+        <p>Voici la solution complète:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_all_upper(text: str) -> bool:
+
+    text1 = text.replace(" ", "")
+    return all((text1, not text1.isdigit(), text1.isupper()))
+        </pre>
+        </div>
+        <p>
+            Maintenant que vous avez compris la logique interne de la vérification, je tiens à vous dire que Python est suffisamment intelligent et que <b class="code">str.isupper()</b> effectue toutes les vérifications nécessaires par lui-même! Ainsi, le code suivant fonctionne parfaitement.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_all_upper(text: str) -> bool:
+
+    return text.isupper()
+        </pre>
+        </div>
+        <p>
+            Vous pouvez également utiliser la fonction lambda (anonyme):
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+is_all_upper = lambda text: text.isupper()
+        </pre>
+        </div>
+        <p>
+            Puisque vous utilisez une méthode standard sans aucune modification, vous pouvez l'utiliser à la place de votre fonction de cette manière. Toutes ces solutions fonctionnent. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+is_all_upper = str.isupper
+        </pre>
+        </div>
+        <p>
+            Remarquez qu'il n'y a pas de parenthèses - vous faites référence à la méthode, vous ne l'appelez pas.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Merci beaucoup! Je comprends mieux maintenant! Tout fonctionne bien!
+    </div>
+    <div class="answer">
+        👍 Heureux de l'apprendre!
+    </div>
+</div>
+</body>
