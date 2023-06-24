@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        I have no idea how to start solving this mission.
+    </div>
+    <div class="answer">
+        <p>
+            💡 The general idea is to remove all white spaces from the given <b class="code">text</b>, check all the characters together not to be a number and every character - to be in uppercase.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Ok, what should I start from?
+    </div>
+    <div class="answer">
+        <p>
+            First of all, replace all white spaces in <b class="code">text</b> with empty line "". Do it with <a target="_blank" href="https://www.w3schools.com/python/ref_string_replace.asp">str.replace()</a> method. Assign the result to a variable. 
+        </p>
+        <pre class="brush: python">
+text1 = text.replace(" ", "")
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        That's easy. What should I check next?
+    </div>
+    <div class="answer">
+        <p>
+            You need to check a few conditions. For this purpose you may use <b class="code">and</b> operator or <a target="_blank" href="https://www.w3schools.com/python/ref_func_all.asp">all()</a> function with all necessary conditions as elements of argument sequence.
+        </p>
+        <pre class="brush: python">
+return all((...))
+        </pre>
+        <p>
+            Notice, that the function takes only one argument - a sequence of conditions.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Let's start checking our new text1! what should be the first one?
+    </div>
+    <div class="answer">
+        <p>
+            According to the description, the checking of empty <b class="code">text1</b> must return <b class="code">False</b>. So to get <b class="code">True</b>, you need <b class="code">text1</b> NOT to be empty. This is the first checking and to perform it you just need to put <b class="code">text1</b> itself as an argument of <b class="code">all()</b>. Python interprets non-empty strings as <b class="code">True</b>.
+        </p>
+        <pre class="brush: python">
+return all((text1, ...))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Short and clever! What's next?
+    </div>
+    <div class="answer">
+        <p>
+            Now you need to check if <b class="code">text1</b> is not a solid number (has no letters and may be converted to an integer). Use <a target="_blank" href="https://www.w3schools.com/python/ref_string_isdigit.asp">str.isdigit()</a> method, which checks all characters in a string to be digits. You need to invert the result of checking since you do NOT need your <b class="code">text1</b> to be a number. 
+        </p>
+        <pre class="brush: python">
+return all((text1, not text1.isdigit(), ...))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        If text1 is not empty and is not a number, how to check if it's in upper case?
+    </div>
+    <div class="answer">
+        <p>
+            Yes, this is the final checking. Python has a specific method to check it (digit with a letter in upper case is considered as upper too, the same with letter in lower case) <a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a>. It returns <b class="code">True</b> is all symbols in a string are in upper case. 
+        </p>
+        <pre class="brush: python">
+return all((text1, not text1.isdigit(), text1.isupper()))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        So, how my final solution should look like?
+    </div>
+    <div class="answer">
+        <p>
+            You just need to wrap your code into function expression. Using type hints for input and output data are highly recommended. 
+        </p>
+        <p>Here is the whole solution:</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_all_upper(text: str) -> bool:
+
+    text1 = text.replace(" ", "")
+    return all((text1, not text1.isdigit(), text1.isupper()))
+        </pre>
+        </div>
+        <p>
+            Now, when you understand the inner logic of checking, I want to tell you, that Python is smart enough and <b class="code">str.isupper()</b> does all necessary checking by itself! So, the following code works just fine.
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_all_upper(text: str) -> bool:
+
+    return text.isupper()
+        </pre>
+        </div>
+        <p>
+            You may also use lambda (anonymous) function:
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+is_all_upper = lambda text: text.isupper()
+        </pre>
+        </div>
+        <p>
+            Since you use a standard method without any changes, you may use it instead of your function this way. All these solutions work. 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+is_all_upper = str.isupper
+        </pre>
+        </div>
+        <p>
+            Notice, that there are no parenthesis - you refer to the method, not calling it.
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        Thanks! I know and understand more now! Everything works fine!
+    </div>
+    <div class="answer">
+        👍 Glad to hear it!
+    </div>
+</div>
+</body>
