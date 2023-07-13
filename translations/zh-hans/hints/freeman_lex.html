@@ -1,0 +1,136 @@
+<body data-author="freeman_lex">
+<div class="question-answer">
+    <div class="question">
+        我不知道如何开始解决这项任务。
+    </div>
+    <div class="answer">
+        <p>
+            💡 总体思路是从给定的<b class="code">text</b> 中删除所有空格，检查所有字符是否为数字，每个字符是否为大写字母。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        好吧，我应该从什么开始呢？
+    </div>
+    <div class="answer">
+        <p>
+            首先，用空行""替换<b class="code">text</b> 中的所有空格。用<a target="_blank" href="https://www.w3schools.com/python/ref_string_replace.asp">str.replace()</a> 方法完成。将结果赋值给一个变量。 
+        </p>
+        <pre class="brush: python">
+text1 = text.replace(" ", "")
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        这很简单。下一步我应该检查什么？
+    </div>
+    <div class="answer">
+        <p>
+            您需要检查几个条件。为此，您可以使用<b class="code">and</b> 运算符或<a target="_blank" href="https://www.w3schools.com/python/ref_func_all.asp">all()</a> 函数，将所有必要条件作为参数序列的元素。
+        </p>
+        <pre class="brush: python">
+return all((...))
+        </pre>
+        <p>
+            注意，函数只需要一个参数--条件序列。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        让我们开始检查我们的新文本1！第一个应该是什么？
+    </div>
+    <div class="answer">
+        <p>
+            根据描述，检查空的<b class="code">text1</b> 必须返回<b class="code">False</b> 。因此，要得到<b class="code">True</b> ，您需要<b class="code">text1</b> 不是空的。这是第一次检查，执行它只需要将<b class="code">text1</b> 本身作为<b class="code">all()</b> 的参数。Python 将非空字符串解释为<b class="code">True</b> 。
+        </p>
+        <pre class="brush: python">
+return all((text1, ...))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        简短而聪明！下一步是什么？
+    </div>
+    <div class="answer">
+        <p>
+            现在您需要检查<b class="code">text1</b> 是否不是实数（没有字母，可以转换为整数）。使用<a target="_blank" href="https://www.w3schools.com/python/ref_string_isdigit.asp">str.isdigit()</a> 方法，检查字符串中的所有字符是否为数字。您需要反转检查结果，因为您不需要您的<b class="code">text1</b> 是数字。 
+        </p>
+        <pre class="brush: python">
+return all((text1, not text1.isdigit(), ...))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        如果text1不为空且不是数字，如何检查它是否为大写字母？
+    </div>
+    <div class="answer">
+        <p>
+            是的，这是最后的检查。Python 有一个特定的方法来检查 (大写字母的数字也被认为是大写字母，小写字母也一样)<a target="_blank" href="https://www.w3schools.com/python/ref_string_isupper.asp">str.isupper()</a> 。如果字符串中的所有符号都是大写，它返回<b class="code">True</b> 。 
+        </p>
+        <pre class="brush: python">
+return all((text1, not text1.isdigit(), text1.isupper()))
+        </pre>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        那么，我的最终解决方案应该是怎样的呢？
+    </div>
+    <div class="answer">
+        <p>
+            您只需将代码封装为函数表达式。强烈建议对输入和输出数据使用类型提示。 
+        </p>
+        <p>以下是整个解决方案：</p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_all_upper(text: str) -> bool:
+
+    text1 = text.replace(" ", "")
+    return all((text1, not text1.isdigit(), text1.isupper()))
+        </pre>
+        </div>
+        <p>
+            现在，当你理解了检查的内在逻辑，我想告诉你，Python 是足够聪明的，<b class="code">str.isupper()</b> 自己完成所有必要的检查！因此，下面的代码可以正常工作。
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+def is_all_upper(text: str) -> bool:
+
+    return text.isupper()
+        </pre>
+        </div>
+        <p>
+            您也可以使用 lambda (匿名) 函数：
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+is_all_upper = lambda text: text.isupper()
+        </pre>
+        </div>
+        <p>
+            由于您使用的是标准方法，没有做任何改动，您可以使用它来代替您的函数。所有这些解决方案都有效。 
+        </p>
+        <div class="spoiler">
+        <pre class="brush: python">
+is_all_upper = str.isupper
+        </pre>
+        </div>
+        <p>
+            请注意，这里没有括号--您指的是方法，而不是调用它。
+        </p>
+    </div>
+</div>
+<div class="question-answer">
+    <div class="question">
+        谢谢！我现在知道并理解得更多了！一切正常！
+    </div>
+    <div class="answer">
+        很高兴听到这个消息！
+    </div>
+</div>
+</body>
